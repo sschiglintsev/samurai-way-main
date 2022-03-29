@@ -2,25 +2,17 @@ import React from 'react';
 import clsses from './Dialogs.module.css'
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
-import {v1} from "uuid";
+import {dialogsType, messagesType} from "../../Redux/State";
 
+type DialogsPropsType = {
+    propsDialogs:Array<dialogsType>,
+    propsMessages:Array<messagesType>
+}
 
-export const Dialogs = () => {
+export const Dialogs = (props:DialogsPropsType) => {
 
-    let Dialogs = [
-        {id: v1(), name: 'Andrey'},
-        {id: v1(), name: 'Vika'},
-        {id: v1(), name: 'David'}
-    ]
-
-    let Messages = [
-        {id: v1(), message: 'Hi bro'},
-        {id: v1(), message: 'Hi bro'},
-        {id: v1(), message: 'Hi bro'}
-    ]
-
-    const NewDialogs = Dialogs.map(d => <Dialog name={d.name} id={d.id}/>)
-    const NewMessages = Messages.map(m => <Message message={m.message}/>)
+    const NewDialogs = props.propsDialogs.map(d => <Dialog name={d.name} id={d.id}/>)
+    const NewMessages = props.propsMessages.map(m => <Message message={m.message}/>)
 
     return (
         <div className={clsses.dialogs}>

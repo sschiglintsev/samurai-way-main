@@ -8,39 +8,12 @@ import {Route, BrowserRouter} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-
-export type ArrayDialogs = {
-    id: string,
-    name: string
-}
-
-export type ArrayMessages = {
-    id: string,
-    message: string
-}
-
-export  type ArrayPosts = {
-    id: string,
-    message: string,
-    likeCount: number
-}
-
-export type MessageType = {
-    messages: Array<ArrayMessages>,
-    dialogs: Array<ArrayDialogs>,
-
-}
-export type PostsType = {
-    posts: Array<ArrayPosts>,
-
-}
-export type StatePageType = {
-    profilePage: PostsType
-    messagesPage: MessageType
-}
+import {stateTypeRoot} from "./Redux/State";
 
 export  type AppPropsType = {
-    state: StatePageType
+    state: stateTypeRoot
+    addPost:(message:string)=>void
+    changeMessagePost:(message:string)=>void
 }
 
 function App(props: AppPropsType) {
@@ -55,7 +28,9 @@ function App(props: AppPropsType) {
                     <Route render={() => <Dialogs propsDialogs={props.state.messagesPage.dialogs}
                               propsMessages={props.state.messagesPage.messages}/>}
                     path={'/dialogs'}/>
-                    <Route render={() => <Profile propsPosts={props.state.profilePage.posts}/>}
+                    <Route render={() => <Profile propsProfilePage={props.state.profilePage}
+                                                  addPost={props.addPost}
+                                                  changeMessagePost={props.changeMessagePost}/>}
                     path={'/profile'}/>
                     <Route render={() => <News/>} path={'/news'}/>
                     <Route render={() => <Music/>} path={'/music'}/>

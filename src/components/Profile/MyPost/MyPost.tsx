@@ -1,16 +1,31 @@
 import React from 'react';
 import {Post} from "./Post/Post";
-import {v1} from "uuid";
+import {postType} from "../../../Redux/State";
 
-export const MyPost = () => {
 
-    const Posts = [
-        {id: v1(), message: 'Первый пост', likeCount: 5},
-        {id: v1(), message: 'Второй пост', likeCount: 10},
-        {id: v1(), message: 'Третий пост', likeCount: 1}
-    ]
+type MyPostProps = {
+    messagePost: string
+    posts: Array<postType>
+    addPost: (message: string) => void
+    changeMessagePost: (message: string) => void
+}
 
-    const NewPosts = Posts.map(p => <Post id={p.id} message={p.message} likeСount={p.likeCount}/>)
+export const MyPost = (props: MyPostProps) => {
+
+    const NewPosts = props.posts.map(p => <Post id={p.id} message={p.message} likeСount={p.likeCount}/>)
+
+    let textAreaRef = React.createRef<HTMLTextAreaElement>()
+
+    const onChangeHandler = () => {
+        if (textAreaRef.current){
+            props.changeMessagePost(textAreaRef.current.value)
+        }
+    }
+    const onClickHandler = () => {
+        if (textAreaRef.current) {
+            props.addPost(textAreaRef.current.value)
+        }
+    }
 
     return (
         <div>
@@ -18,8 +33,10 @@ export const MyPost = () => {
             <div>
                 New post
                 <div>
-                    <input/>
-                    <button>add post</button>
+                    <textarea ref={textAreaRef}
+                              value={props.messagePost}
+                              onChange={onChangeHandler}/>
+                    <button onClick={onClickHandler}>add post</button>
                 </div>
             </div>
             {NewPosts}
