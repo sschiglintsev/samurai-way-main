@@ -1,29 +1,31 @@
 import React from 'react';
 import {Post} from "./Post/Post";
-import {postType} from "../../../Redux/State";
+import {ActionType, addPostAC, changeMessagePostAC, postType} from "../../../Redux/State";
 
 
 type MyPostProps = {
     messagePost: string
     posts: Array<postType>
-    addPost: (message: string) => void
-    changeMessagePost: (message: string) => void
+    dispatch:(action: ActionType)=>void
 }
 
 export const MyPost = (props: MyPostProps) => {
 
-    const NewPosts = props.posts.map(p => <Post id={p.id} message={p.message} likeСount={p.likeCount}/>)
+    const NewPosts = props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} likeСount={p.likeCount}/>)
 
     let textAreaRef = React.createRef<HTMLTextAreaElement>()
 
+
+
     const onChangeHandler = () => {
         if (textAreaRef.current){
-            props.changeMessagePost(textAreaRef.current.value)
+            const message = textAreaRef.current.value
+            props.dispatch(changeMessagePostAC(message))
         }
     }
     const onClickHandler = () => {
         if (textAreaRef.current) {
-            props.addPost(textAreaRef.current.value)
+            props.dispatch(addPostAC())
         }
     }
 
