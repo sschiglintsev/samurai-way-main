@@ -24,15 +24,16 @@ function App(props: AppPropsType) {
                     <Navbar/>
                 </div>
                 <div className={classes.profile}>
-                    <Route render={() => <Dialogs propsDialogs={props.state.messagesPage.dialogs}
+                    <Route element={() => <Dialogs propsDialogs={props.state.messagesPage.dialogs}
                               propsMessages={props.state.messagesPage.messages}/>}
                     path={'/dialogs'}/>
-                    <Route render={() => <Profile propsProfilePage={props.state.profilePage}
+                    <Route element={() => <Profile propsProfilePage={props.state.profilePage}
                                                   dispatch={props.dispatch}/>}
                     path={'/profile'}/>
-                    <Route render={() => <News/>} path={'/news'}/>
-                    <Route render={() => <Music/>} path={'/music'}/>
-                    <Route render={() => <Settings/>} path={'/settings'}/>
+                    <Route element={() => <News/>} path={'/news'}/>
+                    <Route element={() => <Music/>} path={'/music'}/>
+                    <Route element={() => <Settings/>} path={'/settings'}/>
+                    <Route element={() => <Settings/>} path={'/settings'}/>
                 </div>
             </div>
         </BrowserRouter>
