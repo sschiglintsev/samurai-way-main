@@ -1,12 +1,18 @@
 import React from 'react';
 import {Post} from "./Post/Post";
-import {ActionType, addPostAC, changeMessagePostAC, postType} from "../../../Redux/State";
+import {Button, TextField} from "@material-ui/core";
 
+export type postType = {
+    id: string,
+    message: string,
+    likeCount: number
+}
 
 type MyPostProps = {
     messagePost: string
     posts: Array<postType>
-    dispatch:(action: ActionType)=>void
+    changeMessagePost: (message:string) => void
+    addPost: () => void
 }
 
 export const MyPost = (props: MyPostProps) => {
@@ -15,30 +21,35 @@ export const MyPost = (props: MyPostProps) => {
 
     let textAreaRef = React.createRef<HTMLTextAreaElement>()
 
-
-
-    const onChangeHandler = () => {
-        if (textAreaRef.current){
-            const message = textAreaRef.current.value
-            props.dispatch(changeMessagePostAC(message))
-        }
-    }
-    const onClickHandler = () => {
+    const onChangeMessagePost = () => {
         if (textAreaRef.current) {
-            props.dispatch(addPostAC())
+            const message = textAreaRef.current.value
+            props.changeMessagePost(message)
         }
     }
-
+    const onAddPost = () => {
+        if (textAreaRef.current) {
+            props.addPost()
+        }
+    }
     return (
         <div>
             My post
             <div>
                 New post
                 <div>
-                    <textarea ref={textAreaRef}
-                              value={props.messagePost}
-                              onChange={onChangeHandler}/>
-                    <button onClick={onClickHandler}>add post</button>
+                    <TextField
+                        inputRef={textAreaRef}
+                        value={props.messagePost}
+                        onChange={onChangeMessagePost}
+                        id="outlined-basic"
+                        label="Enter you massage"
+                        variant="outlined"
+                        style={{background:'white'}}
+                    />
+                    <Button variant="contained" onClick={onAddPost} >
+                        add post
+                    </Button>
                 </div>
             </div>
             {NewPosts}
