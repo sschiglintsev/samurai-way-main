@@ -1,0 +1,25 @@
+.App_grid {
+    display: grid;
+
+    grid-template-areas: "appHeader appHeader" "appNav appProfile";
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
+    grid-gap: 5px;
+}
+
+.navbar {
+    grid-area: appNav;
+    background: gainsboro;
+}
+
+.profile {
+    grid-area: appProfile;
+    background: gainsboro;
+}
+
+.header {
+    grid-area: appHeader;
+}
+
+
+
