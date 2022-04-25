@@ -1,30 +1,21 @@
 import React from 'react';
 import classes from "./NavBar.module.css";
+import {MenuItem, MenuList, Paper} from "@material-ui/core";
 import {NavLink} from "react-router-dom";
 
-const Navbar = () => {
+export const Navbar = () => {
     return (
         <div className={classes.navbar}>
-            <nav>
-                <div>
-                    <NavLink to={'/profile'}>Profile</NavLink>
-                </div>
-                <div>
-                    <NavLink to={'/dialogs'}>Messages</NavLink>
-                </div>
-                <div>
-                    <NavLink to={'news'}>News</NavLink>
-                </div>
-                <div>
-                    <NavLink to={'/music'}>Music</NavLink>
-                </div>
-                <div>
-                    <NavLink to={'/settings'}>Settings</NavLink>
-                </div>
-            </nav>
-
+            <Paper>
+                <MenuList>
+                    <NavLink to={'/profile'}><MenuItem style={{color :'black'}}>Profile</MenuItem></NavLink>
+                    <NavLink to={'/dialogs'}><MenuItem style={{color :'black'}}>Messages</MenuItem></NavLink>
+                    <NavLink to={'/users'}><MenuItem style={{color :'black'}}>Users</MenuItem></NavLink>
+                    <NavLink to={'news'}><MenuItem style={{color :'black'}}>News</MenuItem></NavLink>
+                    <NavLink to={'/music'}><MenuItem style={{color :'black'}}>Music</MenuItem></NavLink>
+                    <NavLink to={'/settings'}><MenuItem style={{color :'black'}}>Settings</MenuItem></NavLink>
+                </MenuList>
+            </Paper>
         </div>
     );
 };
-
-export default Navbar;
