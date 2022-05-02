@@ -3,9 +3,12 @@ import {ActionType} from "./reducer-dialogs";
 
 export type userType = {
     id: string,
-    photo: string,
-    follow: boolean,
-    fullName: string,
+    photos: {
+        small:string,
+        large:string
+    },
+    followed: boolean,
+    name: string,
     status: string,
     location: {
         country: string,
@@ -26,45 +29,21 @@ const ADD_DIALOGS_MESSAGE = 'ADD-DIALOGS-MESSAGE'
 
 const initilState = {
     users: [
-        {
-            id: v1(),
-            photo: 'https://pngicon.ru/file/uploads/2_16.png',
-            follow: true,
-            fullName: 'Andrey',
-            status: 'I so beatuful',
-            location: {country: 'Turkey', city: 'Stanbul'}
-        },
-        {
-            id: v1(),
-            photo: 'https://pngicon.ru/file/uploads/2_16.png',
-            follow: true,
-            fullName: 'Andrey',
-            status: 'I so beatuful',
-            location: {country: 'Turkey', city: 'Stanbul'}
-        },
-        {
-            id: v1(),
-            photo: 'https://pngicon.ru/file/uploads/2_16.png',
-            follow: true,
-            fullName: 'Andrey',
-            status: 'I so beatuful',
-            location: {country: 'Turkey', city: 'Stanbul'}
-        },
     ]
 }
 
 export const reducerUsers = (state: usersType = initilState, action: ActionType) => {
     switch (action.type) {
         case "SET-USERS": {
-            const stateCopy = {...state, users: [...state.users]}
+            const stateCopy = {...state, users: [...state.users, ...action.users]}
             return stateCopy
         }
         case "FOLLOW": {
-            const stateCopy = {...state,users: state.users.map(el=>el.id===action.id? {...el, follow:true}:el)}
+            const stateCopy = {...state,users: state.users.map(el=>el.id===action.id? {...el, followed:true}:el)}
             return stateCopy
         }
         case "UNFOLLOW": {
-            const stateCopy = {...state, users: state.users.map(el=>el.id===action.id?{...el, follow:false}:el)}
+            const stateCopy = {...state, users: state.users.map(el=>el.id===action.id?{...el, followed:false}:el)}
             return stateCopy
         }
         default:
@@ -76,9 +55,10 @@ export type ActionSetUsers = ReturnType<typeof setUsersAC>
 export type FollowUsers = ReturnType<typeof followAC>
 export type UnFollowUsers = ReturnType<typeof unFollowAC>
 
-export const setUsersAC = () => {
+export const setUsersAC = (users:Array<userType>) => {
     return {
         type: SET_USERS,
+        users
     } as const
 }
 export const followAC = (id: string) => {

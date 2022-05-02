@@ -23,17 +23,18 @@ export const User = (props: userPropsType) => {
         props.unFollow(props.user.id)
     }
 
+
     return (
         <Paper >
             <Grid container spacing={5} style={{margin:'10px', width: '100%'}}>
                 <Grid item>
                     <ButtonBase>
-                        <Img alt="avatar" src={props.user.photo}/>
+                        <Img alt="avatar" src={props.user.photos.small===null? 'https://pngicon.ru/file/uploads/2_16.png': ''}/>
                     </ButtonBase>
 
                     <Grid item >
-                        <Button variant="contained" onClick={props.user.follow?onUnFollow:onFollow} style={{width: '100px'}}>
-                            {props.user.follow ?
+                        <Button variant="contained" onClick={props.user.followed?onUnFollow:onFollow} style={{width: '100px'}}>
+                            {props.user.followed ?
                                 'UNFOLLOW'
                                 : 'FOLLOW'}
                         </Button>
@@ -44,7 +45,7 @@ export const User = (props: userPropsType) => {
                     <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
                             <Typography gutterBottom variant="subtitle1" component="div">
-                                {props.user.fullName}
+                                {props.user.name}
                             </Typography>
                             <Typography variant="body2">
                                 {props.user.status}
@@ -53,10 +54,12 @@ export const User = (props: userPropsType) => {
                     </Grid>
                     <Grid item>
                         <Typography variant="subtitle1" component="div">
-                            {props.user.location.country}
+                            Country
+                            {/*{props.user.location.country}*/}
                         </Typography>
                         <Typography variant="subtitle1" component="div">
-                            {props.user.location.city}
+                            City
+                            {/*{props.user.location.city}*/}
                         </Typography>
                     </Grid>
                 </Grid>

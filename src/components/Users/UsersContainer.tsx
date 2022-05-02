@@ -1,11 +1,11 @@
 import React from 'react';
-import {Users} from "./Users";
 import {connect} from "react-redux";
-import {followAC, setUsersAC, unFollowAC} from "../../Redux/reducer-users";
+import {followAC, setUsersAC, unFollowAC, userType} from "../../Redux/reducer-users";
 import {rootReducerType} from "../../Redux/redux-store";
+import {Users} from "./Users";
 
 type dispatchType = {
-    setUsers: () => void,
+    setUsers: (users:Array<userType>) => void,
     follow:(id:string) => void,
     unFollow:(id:string) => void
 }
@@ -18,8 +18,8 @@ const matStateToProps = (state: rootReducerType) => {
 
 const mapDispatchToProps = (dispatch: any): dispatchType => {
     return {
-        setUsers: () => {
-            dispatch(setUsersAC())
+        setUsers: (users:Array<userType>) => {
+            dispatch(setUsersAC(users))
         },
         follow: (id:string) => {
             dispatch(followAC(id))
