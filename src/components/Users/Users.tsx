@@ -1,52 +1,73 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import {userType} from "../../Redux/reducer-users";
 import {User} from "./User/User";
-import {Button} from "@material-ui/core";
-import axios from "axios";
+import {Button, CircularProgress} from "@material-ui/core";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import style from "./Users.module.css"
 
 type usersPropsType = {
     users: Array<userType>,
-    setUsers: (users: Array<userType>) => void,
+    setCurrentPage: (value: number) => void,
     follow: (id: string) => void,
     unFollow: (id: string) => void
+    totalUsersCount: number,
+    pageSize: number,
+    currentPage: number,
+    onAddUsers: () => void,
+    isLoading: boolean
 }
 
-export class Users extends React.Component<usersPropsType> {
-    constructor(props: usersPropsType) {
-        super(props)
+
+export const Users: React.FC<usersPropsType> = ({
+                                                    users,
+                                                    currentPage,
+                                                    pageSize,
+                                                    totalUsersCount,
+                                                    follow,
+                                                    unFollow,
+                                                    onAddUsers,
+                                                    setCurrentPage,
+                                                    isLoading,
+                                                    ...restProps
+                                                }) => {
+
+    function onPaginationchange(event: ChangeEvent<unknown>,currentPage: number) {
+        setCurrentPage(currentPage)
     }
 
-    componentDidMount(): void {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => {
-                this.props.setUsers(response.data.items)
-            })
-    }
-
-
-    onAddUsers() {
-    }
-
-    render() {
-        return (
-            <div>
-                <div>
-                    {this.props.users.map(el =>
-                        <User key={el.id + el.name}
-                              follow={this.props.follow}
-                              unFollow={this.props.unFollow}
+    let countPages: number = Math.ceil(totalUsersCount / pageSize);
+    return (
+        < div>
+            <div className={style.pagination}>
+                <Stack spacing={10}>
+                    <Pagination count={countPages}
+                                page={currentPage}
+                                variant="outlined"
+                                onChange={onPaginationchange}/>
+                </Stack>
+                {isLoading === true ? <CircularProgress color="inherit"/> : null}
+            </div>
+            < div>
+                {
+                    users.map((el, i) =>
+                        <User key={i}
+                              follow={follow}
+                              unFollow={unFollow}
                               user={el}
                         />
-                    )}
-                </div>
-                <p></p>
-                <div>
-                    <Button variant="contained" onClick={this.onAddUsers}
-                            style={{width: '100%', background: 'green', color: 'white'}}>
-                        SET USERS
-                    </Button>
-                </div>
+                    )
+                }
             </div>
-        );
-    }
-}
+            <p></p>
+            <div>
+                <Button variant="contained" onClick={onAddUsers}
+                        style={{width: '100%', background: 'green', color: 'white'}}>
+                    SET USERS
+                </Button>
+            </div>
+        </div>
+    );
+};
+
+export default Users;

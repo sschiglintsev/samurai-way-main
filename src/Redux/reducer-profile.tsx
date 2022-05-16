@@ -4,13 +4,45 @@ import {ActionType} from "./reducer-dialogs";
 
 const ADD_POST = "ADD-POST"
 const CHANGE_MESSAGE_POST = "CHANGE-MESSAGE-POST"
+const SET_PROFILE = "SET-PROFILE"
+const SET_IS_LOADING_PROFILE = "SET-IS-LOADING-PROFILE"
+
+type contactsType = {
+    facebook: string,
+    website: string | null,
+    vk: string,
+    twitter: string,
+    instagram: string,
+    youtube: string | null,
+    github: string,
+    mainLink: string | null
+}
+
+type photosType = {
+    small: string,
+    large: string
+}
+
+export type profileType = {
+    aboutMe: string,
+    contacts: contactsType,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: number,
+    photos: photosType
+}
 
 type profilePageType = {
+    profile: profileType | null,
     messagePost: string,
-    posts: Array<postType>
+    posts: Array<postType>,
+    isLoading: boolean
 }
 
 const initialState = {
+    profile: null,
+    isLoading: false,
     messagePost: '',
     posts: [
         {id: v1(), message: 'Третий пост', likeCount: 5},
@@ -19,9 +51,10 @@ const initialState = {
     ]
 }
 
-export const reducerProfile = (state: profilePageType = initialState
-    , action: ActionType) => {
+export const reducerPosts = (state: profilePageType = initialState
+    , action: ActionType): profilePageType => {
     switch (action.type) {
+
         case ADD_POST: {
             const stateCopy = {...state, posts: [...state.posts]}
             const newPost = {
@@ -38,6 +71,14 @@ export const reducerProfile = (state: profilePageType = initialState
             stateCopy.messagePost = action.message;
             return stateCopy
         }
+
+        case "SET-PROFILE": {
+            return {...state, profile: action.profile}
+        }
+        case "SET-IS-LOADING-PROFILE":
+            return {
+                ...state, isLoading: action.isLoading
+            }
         default:
             return state
     }
@@ -45,6 +86,8 @@ export const reducerProfile = (state: profilePageType = initialState
 
 export type ActionAddPostType = ReturnType<typeof addPostAC>
 export type ActionChangeMessagePost = ReturnType<typeof changeMessagePostAC>
+export type ActionSetProfile = ReturnType<typeof setProfile>
+export type ActionSetIsLoadingProfile = ReturnType<typeof setIsLoadingProfile>
 
 export const addPostAC = () => {
     return {
@@ -57,3 +100,19 @@ export const changeMessagePostAC = (message: string) => {
         message: message
     } as const
 }
+
+export const setProfile = (profile: profileType) => {
+    return {
+        type: SET_PROFILE,
+        profile: profile
+    } as const
+}
+
+export const setIsLoadingProfile = (isLoading: boolean) => {
+    return {
+        type: SET_IS_LOADING_PROFILE,
+        isLoading
+    } as const
+}
+
+

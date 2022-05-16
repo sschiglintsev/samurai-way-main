@@ -1,6 +1,17 @@
 import {v1} from "uuid";
-import {ActionAddPostType, ActionChangeMessagePost} from "./reducer-profile";
-import {ActionSetUsers, FollowUsers, UnFollowUsers} from "./reducer-users";
+import {
+    ActionAddPostType,
+    ActionChangeMessagePost,
+    ActionSetIsLoadingProfile,
+    ActionSetProfile
+} from "./reducer-profile";
+import {
+    ActionSetCurrentPage, ActionSetIsLoading,
+    ActionSetTotalUsersCount,
+    ActionSetUsers,
+    FollowUsers,
+    UnFollowUsers
+} from "./reducer-users";
 
 export  type ActionType =
     ActionAddPostType
@@ -10,6 +21,11 @@ export  type ActionType =
     | ActionSetUsers
     | FollowUsers
     | UnFollowUsers
+    | ActionSetTotalUsersCount
+    | ActionSetCurrentPage
+    | ActionSetIsLoading
+    | ActionSetProfile
+    | ActionSetIsLoadingProfile
 
 type dialogsType = {
     id: string,

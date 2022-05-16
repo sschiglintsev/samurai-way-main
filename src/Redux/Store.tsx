@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {ActionAddPostType, ActionChangeMessagePost, reducerProfile} from "./reducer-profile";
+import {ActionAddPostType, ActionChangeMessagePost, reducerPosts} from "./reducer-profile";
 import {ActionAddDialogsMessage, ActionDialogsMessageText, reducerDialogs} from "./reducer-dialogs";
 
 type postType = {
@@ -76,7 +76,7 @@ let store: storePropsType = {
     },
     dispatch(action) {
 
-        this._state.profilePage = reducerProfile(this._state.profilePage, action)
+        //this._state.profilePage = reducerPosts(this._state.profilePage, action)
         this._state.messagesPage = reducerDialogs(this._state.messagesPage,action)
         this.onChange()
 
