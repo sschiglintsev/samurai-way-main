@@ -1,15 +1,34 @@
 import React from 'react';
 import classes from './ProfileInfo.module.css'
+import {profileType} from "../../../Redux/reducer-profile";
 
-export const ProfileInfo = () => {
+type profileInfoPropsType = {
+    profile:profileType | null
+}
 
+export const ProfileInfo = (props:profileInfoPropsType) => {
     return (
         <div>
             <div>
-                <img src={'https://img.freepik.com/free-vector/neon-lights-background-theme_52683-44625.jpg?size=626&ext=jpg&ga=GA1.2.139782337.1646394489'}/>
+                {props.profile
+                    ? <div>
+                        <img src={props.profile.photos.small}/>
+                    </div>
+                    : ''}
+
             </div>
             <div className={classes.avatar}>
-                avatar + info
+                {props.profile
+                    ? <div>
+                        {props.profile.fullName}
+                        {props.profile.aboutMe}
+                        {props.profile.contacts.github}
+                        {props.profile.lookingForAJob}
+                        {props.profile.lookingForAJobDescription}
+                        {props.profile.fullName}
+                        {props.profile.userId}
+                    </div>
+                    : ''}
             </div>
         </div>
     );
