@@ -6,21 +6,23 @@ import {Button, TextField} from "@material-ui/core";
 import {messagesPageType} from "../../Redux/reducer-dialogs";
 
 type DialogsPropsType = {
-    changeMessage:(title:string) => void,
-    addMessage:() => void,
+    changeDialogsMessageText:(title:string) => void,
+    addDialogsMessage:() => void,
     propsDialogsMessage: messagesPageType,
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
 
+
+
     const NewDialogs = props.propsDialogsMessage.dialogs.map(d => <Dialog key={d.id} name={d.name} id={d.id}/>)
     const NewMessages = props.propsDialogsMessage.messages.map(m => <Message key={m.id} message={m.message}/>)
 
     const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.changeMessage(e.target.value)
+        props.changeDialogsMessageText(e.target.value)
     }
     const onClickAddMessageHandler = () => {
-        props.addMessage()
+        props.addDialogsMessage()
     }
 
     return (
