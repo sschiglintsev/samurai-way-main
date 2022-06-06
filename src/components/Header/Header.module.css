@@ -1,8 +1,0 @@
-.head {
-    grid-area: appHeader;
-    background: black;
-}
-
-.head img {
-    width: 90px;
-}

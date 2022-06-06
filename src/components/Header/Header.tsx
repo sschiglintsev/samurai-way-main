@@ -1,12 +1,28 @@
 import React from 'react';
-import classes from "./Header.module.css";
+import {AppBar, Box, Button, Toolbar} from "@material-ui/core";
+import Typography from '@mui/material/Typography';
 
-const Header = () => {
+type PropsType = {
+    id: number,
+    login: string,
+    email: string,
+    isAuth: boolean
+}
+
+const Header = (props:PropsType) => {
     return (
-            <header className={classes.head}>
-                <img
-                    src='https://p4.wallpaperbetter.com/wallpaper/167/1008/849/triangle-inverted-black-white-wallpaper-preview.jpg'/>
-            </header>
+        <Box sx={{flexGrow: 1}}>
+            <AppBar position="static">
+                <Toolbar style={{background: 'black'}}>
+                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                        SOCIAL NETWORK
+                    </Typography>
+                    <label>{props.login}</label>
+                    <Button color="inherit">Login</Button>
+                </Toolbar>
+            </AppBar>
+        </Box>
+
     );
 };
 
