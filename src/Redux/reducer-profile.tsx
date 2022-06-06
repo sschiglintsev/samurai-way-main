@@ -1,6 +1,8 @@
 import {v1} from "uuid";
 import {postType} from "../components/Profile/MyPost/MyPost";
 import {ActionType} from "./reducer-dialogs";
+import {Dispatch} from "redux";
+import {profileAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST"
 const CHANGE_MESSAGE_POST = "CHANGE-MESSAGE-POST"
@@ -113,6 +115,30 @@ export const setIsLoadingProfile = (isLoading: boolean) => {
         type: SET_IS_LOADING_PROFILE,
         isLoading
     } as const
+}
+
+export const setProfilePage=(userID:string)=>(dispatch:Dispatch)=> {
+    dispatch(setIsLoadingProfile(true))
+    profileAPI.getAuthMe(userID===undefined?'23521':userID)
+        .then(response => {
+            dispatch(setIsLoadingProfile(false))
+            dispatch(setProfile(response.data))
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+            }
+
+        })
 }
 
 
