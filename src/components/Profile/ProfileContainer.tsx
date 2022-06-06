@@ -5,11 +5,12 @@ import {rootReducerType} from "../../Redux/redux-store";
 import {
     profileType,
     setIsLoadingProfile,
-    setProfile,
+    setProfile, setProfilePage,
 } from "../../Redux/reducer-profile";
 import {connect} from "react-redux";
 import {RouteComponentProps} from "react-router-dom";
 import {useParams} from "react-router-dom";
+import {profileAPI} from "../../api/api";
 
 type dispatchType = {
     setProfile: (profile: profileType | null) => void,
@@ -29,28 +30,7 @@ type PropsType = RouteComponentProps<PathParamType> & OwnPropsType
 export const ProfileWithRouter = (props:PropsType) => {
     const params = useParams<'idUser'>();
     useEffect( () => {
-        props.setIsLoadingProfile(true)
-        let userID = params.idUser
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+ userID)
-            .then(response => {
-                props.setIsLoadingProfile(false)
-                props.setProfile(response.data)
-            })
-            .catch(function (error) {
-                if (error.response) {
-                    // Request made and server responded
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    // The request was made but no response was received
-                    console.log(error.request);
-                } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log('Error', error.message);
-                }
-
-            })
+            props.setProfilePage(params.idUser)
         }
     , [])
 
@@ -66,4 +46,4 @@ const mapStateToProps = (state: rootReducerType): mapStateToPropsType => {
     }
 }
 
-export const ProfileContainer = connect(mapStateToProps, {setProfile, setIsLoadingProfile})(ProfileWithRouter)
+export const ProfileContainer = connect(mapStateToProps, {setProfile, setIsLoadingProfile,setProfilePage})(ProfileWithRouter)
