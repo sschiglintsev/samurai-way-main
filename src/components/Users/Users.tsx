@@ -9,13 +9,14 @@ import style from "./Users.module.css"
 type usersPropsType = {
     users: Array<userType>,
     setCurrentPage: (value: number) => void,
-    follow: (id: string) => void,
-    unFollow: (id: string) => void
     totalUsersCount: number,
     pageSize: number,
     currentPage: number,
     onAddUsers: () => void,
-    isLoading: boolean
+    isLoading: boolean,
+    isLoadingFollow: string[],
+    setOnUnFollow:(userID: string)=>void,
+    setOnFollow:(userID: string)=>void
 }
 
 
@@ -24,11 +25,12 @@ export const Users: React.FC<usersPropsType> = ({
                                                     currentPage,
                                                     pageSize,
                                                     totalUsersCount,
-                                                    follow,
-                                                    unFollow,
+                                                    setOnUnFollow,
+                                                    setOnFollow,
                                                     onAddUsers,
                                                     setCurrentPage,
                                                     isLoading,
+                                                    isLoadingFollow,
                                                     ...restProps
                                                 }) => {
 
@@ -52,9 +54,13 @@ export const Users: React.FC<usersPropsType> = ({
                 {
                     users.map((el, i) =>
                         <User key={i}
-                              follow={follow}
-                              unFollow={unFollow}
+                              setOnFollow={setOnFollow}
+                              setOnUnFollow={setOnUnFollow}
+                              //follow={follow}
+                              //unFollow={unFollow}
                               user={el}
+                              isLoadingFollow={isLoadingFollow}
+                              //setIsLoadingFollow={setIsLoadingFollow}
                         />
                     )
                 }

@@ -1,11 +1,14 @@
 import React from 'react';
 import {userType} from "../../../Redux/reducer-users";
-import {Button, ButtonBase, Grid, Paper, styled, Typography} from "@material-ui/core";
+import {Button, ButtonBase, Grid, MenuItem, Paper, styled, Typography} from "@material-ui/core";
+import {NavLink} from "react-router-dom";
+import {usersAPI} from "../../../api/api";
 
 type userPropsType = {
-    follow: (id: string) => void,
-    unFollow: (id: string) => void
     user: userType
+    isLoadingFollow: string[],
+    setOnUnFollow:(userID: string)=>void,
+    setOnFollow:(userID: string)=>void
 }
 
 const Img = styled('img')({
@@ -15,25 +18,31 @@ const Img = styled('img')({
 });
 
 export const User = (props: userPropsType) => {
-
     const onFollow = () => {
-        props.follow(props.user.id)
+        props.setOnFollow(props.user.id)
+
+
     }
     const onUnFollow = () => {
-        props.unFollow(props.user.id)
-    }
+        props.setOnUnFollow(props.user.id)
+      }
 
 
     return (
-        <Paper >
-            <Grid container spacing={5} style={{margin:'10px', width: '100%'}}>
+        <Paper>
+            <Grid container spacing={5} style={{margin: '10px', width: '100%'}}>
                 <Grid item>
-                    <ButtonBase>
-                        <Img alt="avatar" src={props.user.photos.small===null? 'https://pngicon.ru/file/uploads/2_16.png': ''}/>
-                    </ButtonBase>
-
-                    <Grid item >
-                        <Button variant="contained" onClick={props.user.followed?onUnFollow:onFollow} style={{width: '100px'}}>
+                    <NavLink to={`/profile/${props.user.id}`}>
+                        <ButtonBase>
+                            <Img alt="avatar"
+                                 src={props.user.photos.small === null ? 'https://pngicon.ru/file/uploads/2_16.png' : props.user.photos.small}/>
+                        </ButtonBase>
+                    </NavLink>
+                    <Grid item>
+                        <Button disabled={props.isLoadingFollow.some(el=>el===props.user.id)}
+                                variant="contained"
+                                onClick={props.user.followed ? onUnFollow : onFollow}
+                                style={{width: '100px'}}>
                             {props.user.followed ?
                                 'UNFOLLOW'
                                 : 'FOLLOW'}
@@ -44,9 +53,11 @@ export const User = (props: userPropsType) => {
                 <Grid item xs={12} sm container>
                     <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
-                            <Typography gutterBottom variant="subtitle1" component="div">
-                                {props.user.name}
-                            </Typography>
+                            <NavLink to={`/profile/${props.user.id}`}>
+                                <Typography gutterBottom variant="subtitle1" component="div" style={{color: 'black'}}>
+                                    {props.user.name}
+                                </Typography>
+                            </NavLink>
                             <Typography variant="body2">
                                 {props.user.status}
                             </Typography>
