@@ -9,13 +9,14 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {Navbar} from "./components/NavBar/Navbar";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import { ProfileContainer } from './components/Profile/ProfileContainer';
+import {HeaderContainer} from "./components/Header/HeaderContainer";
 
 
 function App() {
     return (
             <div className={classes.App_grid}>
                 <div className={classes.header}>
-                <Header/>
+                <HeaderContainer  />
                 </div>
                 <div className={classes.navbar}>
                     <Navbar/>
@@ -24,6 +25,7 @@ function App() {
                     <Switch>
                     <Route path={'/dialogs'}><DialogsContainer /></Route>
                     <Route path={'/profile/:idUser'}><ProfileContainer/></Route>
+                    <Route path={'/profile/'}><ProfileContainer/></Route>
                     <Route path={'/users'}><UsersContainer /></Route>
                     <Route path={'/news'}><News/></Route>
                     <Route path={'/music'}><Music/></Route>
