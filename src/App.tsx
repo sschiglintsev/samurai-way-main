@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from "./components/Header/Header";
 import classes from './App.module.css'
 import {Route, Switch} from "react-router-dom";
 import {News} from "./components/News/News";
@@ -10,6 +9,7 @@ import {Navbar} from "./components/NavBar/Navbar";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import { ProfileContainer } from './components/Profile/ProfileContainer';
 import {HeaderContainer} from "./components/Header/HeaderContainer";
+import {LoginPage} from "./components/Login/LoginPage";
 
 
 function App() {
@@ -23,13 +23,14 @@ function App() {
                 </div>
                 <div className={classes.profile}>
                     <Switch>
-                    <Route path={'/dialogs'}><DialogsContainer /></Route>
+                    <Route path={'/dialogs'}><DialogsContainer  /></Route>
                     <Route path={'/profile/:idUser'}><ProfileContainer/></Route>
                     <Route path={'/profile/'}><ProfileContainer/></Route>
                     <Route path={'/users'}><UsersContainer /></Route>
                     <Route path={'/news'}><News/></Route>
                     <Route path={'/music'}><Music/></Route>
                     <Route path={'/settings'}><Settings/></Route>
+                    <Route path={'/login'}><LoginPage/></Route>
                     </Switch>
                 </div>
             </div>

@@ -11,6 +11,7 @@ import {connect} from "react-redux";
 import {RouteComponentProps} from "react-router-dom";
 import {useParams} from "react-router-dom";
 import {profileAPI} from "../../api/api";
+import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 type dispatchType = {
     setProfile: (profile: profileType | null) => void,
@@ -46,4 +47,4 @@ const mapStateToProps = (state: rootReducerType): mapStateToPropsType => {
     }
 }
 
-export const ProfileContainer = connect(mapStateToProps, {setProfile, setIsLoadingProfile,setProfilePage})(ProfileWithRouter)
+export const ProfileContainer = withAuthRedirect(connect(mapStateToProps, {setProfile, setIsLoadingProfile,setProfilePage})(ProfileWithRouter))

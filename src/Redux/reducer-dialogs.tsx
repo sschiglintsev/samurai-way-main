@@ -6,12 +6,13 @@ import {
     ActionSetProfile
 } from "./reducer-profile";
 import {
-    ActionSetCurrentPage, ActionSetIsLoading,
+    ActionSetCurrentPage, ActionSetIsLoading, ActionSetIsLoadingFollow,
     ActionSetTotalUsersCount,
     ActionSetUsers,
     FollowUsers,
     UnFollowUsers
 } from "./reducer-users";
+import {setAuthMeType} from "./reducer-auth";
 
 export  type ActionType =
     ActionAddPostType
@@ -26,6 +27,8 @@ export  type ActionType =
     | ActionSetIsLoading
     | ActionSetProfile
     | ActionSetIsLoadingProfile
+    | setAuthMeType
+    | ActionSetIsLoadingFollow
 
 type dialogsType = {
     id: string,
@@ -82,16 +85,16 @@ export const reducerDialogs = (state: messagesPageType = initilState, action: Ac
     }
 }
 
-export type ActionDialogsMessageText = ReturnType<typeof changeDialogsMessageTextAC>
-export type ActionAddDialogsMessage = ReturnType<typeof addDialogsMessageAC>
+export type ActionDialogsMessageText = ReturnType<typeof changeDialogsMessageText>
+export type ActionAddDialogsMessage = ReturnType<typeof addDialogsMessage>
 
-export const changeDialogsMessageTextAC = (message: string) => {
+export const changeDialogsMessageText = (message: string) => {
     return {
         type: CHANGE_DIALOGS_MESSAGE_TEXT,
         message: message
     } as const
 }
-export const addDialogsMessageAC = () => {
+export const addDialogsMessage = () => {
     return {
         type: ADD_DIALOGS_MESSAGE
     } as const

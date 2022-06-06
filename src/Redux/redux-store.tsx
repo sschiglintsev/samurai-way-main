@@ -9,7 +9,8 @@ const rootReducer = combineReducers({
     profilePage:reducerPosts,
     messagesPage:reducerDialogs,
     userPage:reducerUsers,
-    Auth:reducerAuth
+    Auth:reducerAuth,
+    dialogsPage:reducerDialogs,
 })
 export type rootReducerType = ReturnType<typeof rootReducer>
 
