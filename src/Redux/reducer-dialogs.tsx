@@ -3,7 +3,7 @@ import {
     ActionAddPostType,
     ActionChangeMessagePost,
     ActionSetIsLoadingProfile,
-    ActionSetProfile
+    ActionSetProfile, ActionSetStatus
 } from "./reducer-profile";
 import {
     ActionSetCurrentPage, ActionSetIsLoading, ActionSetIsLoadingFollow,
@@ -29,6 +29,7 @@ export  type ActionType =
     | ActionSetIsLoadingProfile
     | setAuthMeType
     | ActionSetIsLoadingFollow
+    | ActionSetStatus
 
 type dialogsType = {
     id: string,

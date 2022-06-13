@@ -7,6 +7,7 @@ import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {rootReducerType} from "../../Redux/redux-store";
 import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {compose} from "redux";
 
 
 type dialogsAPIPropsType = {
@@ -36,13 +37,21 @@ export class UsersAPI extends React.Component<dialogsAPIPropsType> {
 }
 
 const mapStateToProps = (state: rootReducerType) => {
-    debugger
     return {
         propsDialogsMessage: state.messagesPage,
     }
 }
 
-export const DialogsContainer = withAuthRedirect(connect(mapStateToProps, {
-    addDialogsMessage,
-    changeDialogsMessageText
-})(UsersAPI))
+
+export const DialogsContainer = compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        addDialogsMessage,
+        changeDialogsMessageText
+    }),
+    withAuthRedirect
+)(UsersAPI)
+
+//     withAuthRedirect(connect(mapStateToProps, {
+//     addDialogsMessage,
+//     changeDialogsMessageText
+// })(UsersAPI))

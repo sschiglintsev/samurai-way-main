@@ -1,6 +1,7 @@
 import React from 'react';
-import {AppBar, Box, Button, Toolbar} from "@material-ui/core";
+
 import Typography from '@mui/material/Typography';
+import {AppBar, Box, Button, Toolbar} from "@mui/material";
 
 type PropsType = {
     id: number,

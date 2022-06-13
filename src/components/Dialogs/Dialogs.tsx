@@ -2,8 +2,8 @@ import React, {ChangeEvent} from 'react';
 import clsses from './Dialogs.module.css'
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
-import {Button, TextField} from "@material-ui/core";
 import {messagesPageType} from "../../Redux/reducer-dialogs";
+import {Button, TextField} from "@mui/material";
 
 type DialogsPropsType = {
     changeDialogsMessageText:(title:string) => void,

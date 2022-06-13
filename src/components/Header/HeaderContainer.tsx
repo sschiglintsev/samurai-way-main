@@ -3,10 +3,11 @@ import {connect} from "react-redux";
 import {rootReducerType} from "../../Redux/redux-store";
 import {initialAuthStateType, setAuthMe, setAuthMeTC} from "../../Redux/reducer-auth";
 import Header from "./Header";
+import {compose} from "redux";
 
 type HeaderContainerAPIType = {
-    auth:initialAuthStateType,
-    setAuthMeTC:()=>void
+    auth: initialAuthStateType,
+    setAuthMeTC: () => void
 }
 
 class HeaderContainerAPI extends React.Component<HeaderContainerAPIType> {
@@ -40,8 +41,12 @@ const mapStateToProps = (state: rootReducerType): mapStateToPropsType => {
     }
 }
 
-export const HeaderContainer = connect(mapStateToProps, {
-    setAuthMe,setAuthMeTC,
-})(HeaderContainerAPI)
+export const HeaderContainer = compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        setAuthMe, setAuthMeTC,
+    })
+)(HeaderContainerAPI)
+
+
 
 

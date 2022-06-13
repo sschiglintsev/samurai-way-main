@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 import classes from './App.module.css'
-import {Route, Switch} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {Navbar} from "./components/NavBar/Navbar";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import { ProfileContainer } from './components/Profile/ProfileContainer';
-import {HeaderContainer} from "./components/Header/HeaderContainer";
 import {LoginPage} from "./components/Login/LoginPage";
+import {HeaderContainer} from "./components/Header/HeaderContainer";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import { Route } from 'react-router-dom';
 
 
 function App() {
@@ -22,16 +22,16 @@ function App() {
                     <Navbar/>
                 </div>
                 <div className={classes.profile}>
-                    <Switch>
+
                     <Route path={'/dialogs'}><DialogsContainer  /></Route>
                     <Route path={'/profile/:idUser'}><ProfileContainer/></Route>
-                    <Route path={'/profile/'}><ProfileContainer/></Route>
+                    <Route exact={true} path={'/profile'}><ProfileContainer/></Route>
                     <Route path={'/users'}><UsersContainer /></Route>
                     <Route path={'/news'}><News/></Route>
                     <Route path={'/music'}><Music/></Route>
                     <Route path={'/settings'}><Settings/></Route>
                     <Route path={'/login'}><LoginPage/></Route>
-                    </Switch>
+
                 </div>
             </div>
     );

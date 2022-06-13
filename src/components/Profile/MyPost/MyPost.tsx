@@ -1,6 +1,6 @@
 import React from 'react';
 import {Post} from "./Post/Post";
-import {Button, TextField} from "@material-ui/core";
+import {Button, TextField} from "@mui/material";
 
 export type postType = {
     id: string,

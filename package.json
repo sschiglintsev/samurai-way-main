@@ -1,64 +1,49 @@
 {
-  "name": "samurai-way",
+  "name": "todo13v2",
   "version": "0.1.0",
   "private": true,
-  "homepage": "",
   "dependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.16.7",
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
-    "@material-ui/core": "^4.12.4",
-    "@material-ui/icons": "^4.11.3",
-    "@mui/icons-material": "^5.6.2",
-    "@mui/material": "^5.6.2",
-    "@testing-library/jest-dom": "5.14.1",
-    "@testing-library/react": "12.0.0",
-    "@testing-library/user-event": "13.2.1",
-    "@types/reach__router": "^1.3.10",
-    "antd": "4.18.7",
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.0.1",
+    "@mui/material": "^5.0.2",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-redux": "^7.1.18",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/redux-form": "^8.3.5",
+    "@types/uuid": "^8.3.1",
     "axios": "^0.27.2",
-    "classnames": "2.3.1",
-    "formik": "2.2.9",
-    "gh-pages": "3.2.3",
-    "jest": "27.5.1",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-redux": "7.2.6",
+    "browserslist": "^4.20.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.5",
     "react-router-dom": "5.3.0",
-    "react-scripts": "5.0.0",
-    "react-test-renderer": "17.0.2",
-    "redux": "4.1.2",
-    "redux-form": "8.3.8",
+    "react-scripts": "4.0.3",
+    "redux": "^4.1.1",
+    "redux-form": "^8.3.8",
     "redux-thunk": "^2.4.1",
-    "reselect": "4.1.5",
-    "typescript": "^4.6.3",
+    "typescript": "^4.1.2",
     "uuid": "^8.3.2",
-    "web-vitals": "2.1.0"
+    "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "storybook": "start-storybook -p 6006 -s public",
+    "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
     ]
   },
   "browserslist": {
@@ -74,24 +59,11 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.4.22",
-    "@storybook/addon-essentials": "^6.4.22",
-    "@storybook/addon-interactions": "^6.4.22",
-    "@storybook/addon-links": "^6.4.22",
-    "@storybook/builder-webpack5": "^6.4.22",
-    "@storybook/manager-webpack5": "^6.4.22",
-    "@storybook/node-logger": "^6.4.22",
-    "@storybook/preset-create-react-app": "^4.1.0",
-    "@storybook/react": "^6.4.22",
-    "@storybook/testing-library": "^0.0.10",
-    "@types/node": "16.7.13",
-    "@types/react": "17.0.20",
-    "@types/react-dom": "17.0.9",
-    "@types/react-redux": "7.1.22",
-    "@types/react-router-dom": "5.3.3",
-    "@types/react-test-renderer": "17.0.1",
-    "@types/redux-form": "8.3.3",
-    "@types/uuid": "^8.3.4",
-    "webpack": "^5.72.0"
+    "@storybook/addon-actions": "^6.1.15",
+    "@storybook/addon-essentials": "^6.1.15",
+    "@storybook/addon-links": "^6.1.15",
+    "@storybook/node-logger": "^6.1.15",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.1.15"
   }
 }
