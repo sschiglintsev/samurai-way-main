@@ -32,7 +32,6 @@ type OwnPropsType = mapStateToPropsType & dispatchType
 type PropsType = RouteComponentProps<PathParamType> & OwnPropsType
 
 export const ProfileWithRouter = (props: PropsType) => {
-    console.log("ProfileWithRouter", props.isLoading)
     const params = useParams<PathParamType>();
        useEffect(() => {
             props.setProfilePage(params.idUser)

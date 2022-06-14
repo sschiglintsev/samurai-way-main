@@ -1,27 +1,22 @@
 import React from 'react';
-import {addPostAC, changeMessagePostAC} from "../../../Redux/reducer-profile";
+import {addPostAC} from "../../../Redux/reducer-profile";
 import {MyPost} from "./MyPost";
 import {connect} from "react-redux";
 import {rootReducerType} from "../../../Redux/redux-store";
 
 type dispatchType = {
-    changeMessagePost: (message: string) =>void
-    addPost: () =>void
+    addPost: (messagePost:string) =>void
 }
 
 const mapStateToProps = (state:rootReducerType) => {
     return {
         posts: state.profilePage.posts,
-        messagePost: state.profilePage.messagePost
     }
 }
 const mapDispatchToProps = (dispatch:any):dispatchType => {
     return {
-        changeMessagePost: (message: string) => {
-            dispatch(changeMessagePostAC(message))
-        },
-        addPost: () => {
-            dispatch(addPostAC())
+        addPost: (messagePost:string) => {
+            dispatch(addPostAC(messagePost))
         }
     }
 }

@@ -5,7 +5,6 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST"
-const CHANGE_MESSAGE_POST = "CHANGE-MESSAGE-POST"
 const SET_PROFILE = "SET-PROFILE"
 const SET_IS_LOADING_PROFILE = "SET-IS-LOADING-PROFILE"
 const SET_STATUS = "SET-STATUS"
@@ -39,7 +38,6 @@ export type profileType = {
 export type profilePageType = {
     profile: profileType | null,
     status:string,
-    messagePost: string,
     posts: Array<postType>,
     isLoading: boolean
 }
@@ -48,7 +46,6 @@ const initialState = {
     profile: null,
     status:'',
     isLoading: false,
-    messagePost: '',
     posts: [
         {id: v1(), message: 'Третий пост', likeCount: 5},
         {id: v1(), message: 'Второй пост', likeCount: 10},
@@ -64,18 +61,13 @@ export const reducerPosts = (state: profilePageType = initialState
             const stateCopy = {...state, posts: [...state.posts]}
             const newPost = {
                 id: v1(),
-                message: stateCopy.messagePost,
+                message: action.postMessage,
                 likeCount: 23
             }
             stateCopy.posts.unshift(newPost)
-            stateCopy.messagePost = '';
             return stateCopy;
         }
-        case "CHANGE-MESSAGE-POST": {
-            const stateCopy = {...state}
-            stateCopy.messagePost = action.message;
-            return stateCopy
-        }
+
 
         case "SET-PROFILE": {
             return {...state, profile: action.profile}
@@ -93,22 +85,17 @@ export const reducerPosts = (state: profilePageType = initialState
 }
 
 export type ActionAddPostType = ReturnType<typeof addPostAC>
-export type ActionChangeMessagePost = ReturnType<typeof changeMessagePostAC>
 export type ActionSetProfile = ReturnType<typeof setProfile>
 export type ActionSetIsLoadingProfile = ReturnType<typeof setIsLoadingProfile>
 export type ActionSetStatus = ReturnType<typeof setStatus>
 
-export const addPostAC = () => {
+export const addPostAC = (postMessage:string) => {
     return {
-        type: ADD_POST
+        type: ADD_POST,
+        postMessage
     } as const
 }
-export const changeMessagePostAC = (message: string) => {
-    return {
-        type: CHANGE_MESSAGE_POST,
-        message: message
-    } as const
-}
+
 
 export const setProfile = (profile: profileType) => {
     return {
@@ -132,7 +119,6 @@ export const setIsLoadingProfile = (isLoading: boolean) => {
 }
 
 export const setProfilePage = (userID: string) => (dispatch: Dispatch) => {
-    console.log("userID", userID)
     dispatch(setIsLoadingProfile(true))
     profileAPI.getProfile(userID === undefined ? '23521' : userID)
         .then(response => {

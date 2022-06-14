@@ -24,7 +24,7 @@ const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm);
 
 export const LoginPage = () => {
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+        console.log("form data", formData)
     }
 
     return (

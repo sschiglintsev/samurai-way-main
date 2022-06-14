@@ -1,6 +1,6 @@
 import React from 'react';
 import {Post} from "./Post/Post";
-import {Button, TextField} from "@mui/material";
+import {AddPostFormDataType, AddPostFormReduxForm} from "./AddPostForm";
 
 export type postType = {
     id: string,
@@ -9,48 +9,23 @@ export type postType = {
 }
 
 type MyPostProps = {
-    messagePost: string
     posts: Array<postType>
-    changeMessagePost: (message:string) => void
-    addPost: () => void
+    addPost: (massagePost:string) => void
 }
 
 export const MyPost = (props: MyPostProps) => {
 
     const NewPosts = props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} likeСount={p.likeCount}/>)
 
-    let textAreaRef = React.createRef<HTMLTextAreaElement>()
-
-    const onChangeMessagePost = () => {
-        if (textAreaRef.current) {
-            const message = textAreaRef.current.value
-            props.changeMessagePost(message)
-        }
-    }
-    const onAddPost = () => {
-        if (textAreaRef.current) {
-            props.addPost()
-        }
+    const onAddPost = (formData: AddPostFormDataType) => {
+        props.addPost(formData.messagePost)
     }
     return (
         <div>
             My post
             <div>
                 New post
-                <div>
-                    <TextField
-                        inputRef={textAreaRef}
-                        value={props.messagePost}
-                        onChange={onChangeMessagePost}
-                        id="outlined-basic"
-                        label="Enter you massage"
-                        variant="outlined"
-                        style={{background:'white'}}
-                    />
-                    <Button variant="contained" onClick={onAddPost} >
-                        add post
-                    </Button>
-                </div>
+                <AddPostFormReduxForm onSubmit={onAddPost}/>
             </div>
             {NewPosts}
         </div>

@@ -1,7 +1,6 @@
 import {v1} from "uuid";
 import {
     ActionAddPostType,
-    ActionChangeMessagePost,
     ActionSetIsLoadingProfile,
     ActionSetProfile, ActionSetStatus
 } from "./reducer-profile";
@@ -16,8 +15,6 @@ import {setAuthMeType} from "./reducer-auth";
 
 export  type ActionType =
     ActionAddPostType
-    | ActionChangeMessagePost
-    | ActionDialogsMessageText
     | ActionAddDialogsMessage
     | ActionSetUsers
     | FollowUsers
@@ -44,10 +41,8 @@ type messagesType = {
 export type messagesPageType = {
     dialogs: Array<dialogsType>,
     messages: Array<messagesType>,
-    textMessage: string
 }
 
-const CHANGE_DIALOGS_MESSAGE_TEXT = 'CHANGE-DIALOGS-MESSAGE-TEXT'
 const ADD_DIALOGS_MESSAGE = 'ADD-DIALOGS-MESSAGE'
 
 const initilState = {
@@ -61,7 +56,6 @@ const initilState = {
         {id: v1(), message: 'Hi bro'},
         {id: v1(), message: 'Hi dady'}
     ],
-    textMessage: ''
 }
 
 export const reducerDialogs = (state: messagesPageType = initilState, action: ActionType) => {
@@ -70,15 +64,9 @@ export const reducerDialogs = (state: messagesPageType = initilState, action: Ac
             const stateCopy = {...state, messages: [...state.messages]}
             const newMessage = {
                 id: v1(),
-                message: stateCopy.textMessage,
+                message: action.message,
             }
             stateCopy.messages.unshift(newMessage)
-            stateCopy.textMessage = '';
-            return stateCopy
-        }
-        case CHANGE_DIALOGS_MESSAGE_TEXT: {
-            const stateCopy = {...state}
-            stateCopy.textMessage = action.message;
             return stateCopy
         }
         default:
@@ -86,17 +74,12 @@ export const reducerDialogs = (state: messagesPageType = initilState, action: Ac
     }
 }
 
-export type ActionDialogsMessageText = ReturnType<typeof changeDialogsMessageText>
 export type ActionAddDialogsMessage = ReturnType<typeof addDialogsMessage>
 
-export const changeDialogsMessageText = (message: string) => {
+
+export const addDialogsMessage = (message: string) => {
     return {
-        type: CHANGE_DIALOGS_MESSAGE_TEXT,
-        message: message
-    } as const
-}
-export const addDialogsMessage = () => {
-    return {
-        type: ADD_DIALOGS_MESSAGE
+        type: ADD_DIALOGS_MESSAGE,
+        message
     } as const
 }

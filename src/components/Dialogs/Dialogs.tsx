@@ -3,11 +3,10 @@ import clsses from './Dialogs.module.css'
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
 import {messagesPageType} from "../../Redux/reducer-dialogs";
-import {Button, TextField} from "@mui/material";
+import {AddMessageDialogsFormDataType, AddMessageDialogsReduxForm} from "./AddMessageDialogs";
 
 type DialogsPropsType = {
-    changeDialogsMessageText:(title:string) => void,
-    addDialogsMessage:() => void,
+    addDialogsMessage:(message:string) => void,
     propsDialogsMessage: messagesPageType,
 }
 
@@ -18,11 +17,9 @@ export const Dialogs = (props: DialogsPropsType) => {
     const NewDialogs = props.propsDialogsMessage.dialogs.map(d => <Dialog key={d.id} name={d.name} id={d.id}/>)
     const NewMessages = props.propsDialogsMessage.messages.map(m => <Message key={m.id} message={m.message}/>)
 
-    const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.changeDialogsMessageText(e.target.value)
-    }
-    const onClickAddMessageHandler = () => {
-        props.addDialogsMessage()
+
+    const AddMessageHandler = (formData: AddMessageDialogsFormDataType) => {
+        props.addDialogsMessage(formData.message)
     }
 
     return (
@@ -32,23 +29,7 @@ export const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={clsses.messages}>
                 {NewMessages}
-                <div>
-
-                    <TextField
-                        value={props.propsDialogsMessage.textMessage}
-                        onChange={onChangeMessageHandler}
-                        id="outlined-basic"
-                        label="Enter you massage"
-                        variant="outlined"
-                        style={{background:'white'}}
-
-                    />
-
-                    <p></p>
-                    <Button variant="contained" onClick={onClickAddMessageHandler} >
-                        Add message
-                    </Button>
-                </div>
+                <AddMessageDialogsReduxForm onSubmit={AddMessageHandler}/>
             </div>
         </div>
     );
